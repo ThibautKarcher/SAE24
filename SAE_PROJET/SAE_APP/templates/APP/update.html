@@ -1,0 +1,13 @@
+{% extends "SAE_APP/capteur/template.html" %}
+{% block title %} TestRT {% endblock %}
+
+{% block content %}
+    <h1>Modifier un Capteur</h1>
+    <div class="container">
+        <form method="post" action="/capteur/update_process/{{ capteur.id }}/">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Enregistrer</button>
+        </form>
+    </div>
+{% endblock %}
