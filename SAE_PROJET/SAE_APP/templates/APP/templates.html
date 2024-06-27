@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+
+    <link rel="stylesheet" href="{%static 'index.css' %}" type="text/css">
+
+</head>
+
+<body>
+
+    {% block header %}
+    <header class="header">
+        <h1 class="site-title"></h1>
+        <nav class="navigation">
+            <ul>
+                <li><a href="/index">Capteur</a></li>
+            </ul>
+        </nav>
+    </header>
+    {% endblock %}
+
+    <main class="container">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer class="footer">
+        <p>&copy;2024 SALEIRO David / KARCHER Thibaut / BOUKTAB Yanice</p>
+    </footer>
+
+    <script>
+        setTimeout(function(){
+            window.location.reload(1);
+        }, 30000);
+    </script>
+</body>
+</html>

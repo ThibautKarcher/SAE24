@@ -1,0 +1,46 @@
+{% extends "APP/templates.html" %}
+
+{% block title %} Test {% endblock %}
+
+{% block content %}
+    <h1>Données par Capteur</h1>
+    <div class="container">
+        <form method="get" action="{% url 'filtrer_donnees' %}">
+            {{ form.as_p }}
+            <button type="submit">Filtrer</button>
+        </form>
+        {% for capteur, donnees in donnees_par_capteur.items %}
+        <div class="capteur-card">
+            <h2>Capteur: {{ capteur.id_capteur }}</h2>
+            <h3>{{ capteur.maison }} - {{ capteur.piece }}</h3>
+            <a href="{% url 'update_capteur' id=capteur.id %}" class="btn btn-primary">Modifier</a>
+            <a href="{% url 'delete_capteur' id=capteur.id %}" class="btn btn-primary">Supprimer</a>
+            <a href="{% url 'export_capteur_csv' %}" class="btn btn-primary">Télécharger Capteur CSV</a>
+            <a href="{% url 'export_donnee_csv' %}" class="btn btn-primary">Télécharger Donnee CSV</a>
+            <a href="{% url 'graphique_donnees' %}" class="btn btn-primary">Télécharger Graphique des Données</a>
+            {% if donnees %}
+            <table class="donnee-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Heure</th>
+                        <th>Température (°C)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for donnee in donnees %}
+                    <tr>
+                        <td>{{ donnee.date }}</td>
+                        <td>{{ donnee.heure }}</td>
+                        <td>{{ donnee.temperature }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <p>Aucune donnée disponible pour ce capteur.</p>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
